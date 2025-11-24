@@ -9,7 +9,7 @@ export default function SpamDetector() {
   const [result, setResult] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const API_KEY = import.meta.env.VITE_API_KEY;
+  const API_KEY = import.meta.env.VITE_ADMIN_KEY;
 
   const analyzeEmail = async () => {
     if (!email.trim()) return;
