@@ -19,11 +19,12 @@ export default function SpamDetector() {
       const response = await axios.post(
         "https://bruh-spam.onrender.com/predict",
         {
-          email: email,
+          email_text: email,
         },
         {
           headers: {
             "Content-Type": "application/json",
+            "x-api-key": "MKvy8SAwTMzJvrpmBZGvrh-Bx_bEduX5vV2nI8IGakA",
           },
         }
       );
