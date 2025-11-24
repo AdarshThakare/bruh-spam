@@ -1,18 +1,6 @@
-import React, { useState } from "react";
-import {
-  Mail,
-  Shield,
-  AlertTriangle,
-  CheckCircle,
-  Zap,
-  Skull,
-  PartyPopper,
-  Target,
-  Database,
-  Eye,
-} from "lucide-react";
-import Mailsent from "./assets/mail-sent.svg";
-import Mailit from "./assets/mailit.svg";
+import { useState } from "react";
+import { Mail, CheckCircle, Zap, Skull } from "lucide-react";
+
 import bruh from "./assets/bruh.png";
 import axios from "axios";
 
@@ -20,14 +8,12 @@ export default function SpamDetector() {
   const [email, setEmail] = useState("");
   const [result, setResult] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [showExplosion, setShowExplosion] = useState(false);
 
   const analyzeEmail = async () => {
     if (!email.trim()) return;
 
     setIsAnalyzing(true);
     setResult(null);
-    setShowExplosion(false);
 
     try {
       const response = await axios.post(
@@ -48,8 +34,6 @@ export default function SpamDetector() {
       console.log(err);
     }
 
-    setShowExplosion(true);
-    setTimeout(() => setShowExplosion(false), 1000);
     setIsAnalyzing(false);
   };
 
@@ -73,7 +57,7 @@ export default function SpamDetector() {
           </div>
           <h1 className="text-5xl font-bold tracking-tight mb-2">
             <span className="text-white">bruh</span>
-            <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
               -spam
             </span>
           </h1>
@@ -84,10 +68,10 @@ export default function SpamDetector() {
 
         {/* Main Card */}
         <div className="relative group">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600/30 to-blue-600/30 rounded-3xl blur-lg opacity-50 group-hover:opacity-70 transition duration-500"></div>
+          <div className="absolute -inset-0.5 bg-linear-to-r from-violet-600/30 to-blue-600/30 rounded-3xl blur-lg opacity-50 group-hover:opacity-70 transition duration-500"></div>
 
           <div className="relative bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/60 rounded-3xl overflow-hidden shadow-2xl">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent"></div>
+            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-violet-500/50 to-transparent"></div>
 
             <div className="p-8">
               {/* Textarea */}
@@ -102,7 +86,7 @@ export default function SpamDetector() {
                   </span>
                 </div>
                 <div className="relative group/input">
-                  <div className="absolute -inset-px bg-gradient-to-r from-violet-600/20 to-blue-600/20 rounded-2xl opacity-0 group-focus-within/input:opacity-100 transition-opacity blur"></div>
+                  <div className="absolute -inset-px bg-linear-to-r from-violet-600/20 to-blue-600/20 rounded-2xl opacity-0 group-focus-within/input:opacity-100 transition-opacity blur"></div>
                   <textarea
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -118,8 +102,8 @@ export default function SpamDetector() {
                 disabled={!email.trim() || isAnalyzing}
                 className="w-full group/btn relative disabled:opacity-50 disabled:cursor-not-allowed mb-6 overflow-hidden"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 rounded-xl opacity-70 group-hover/btn:opacity-100 blur transition duration-300"></div>
-                <div className="relative bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 py-4 rounded-xl flex items-center justify-center gap-2.5 font-semibold text-white shadow-lg">
+                <div className="absolute -inset-1 bg-linear-to-r from-violet-600 via-purple-600 to-blue-600 rounded-xl opacity-70 group-hover/btn:opacity-100 blur transition duration-300"></div>
+                <div className="relative bg-linear-to-r from-violet-600 via-purple-600 to-blue-600 py-4 rounded-xl flex items-center justify-center gap-2.5 font-semibold text-white shadow-lg">
                   {isAnalyzing ? (
                     <>
                       <div className="relative">
