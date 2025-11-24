@@ -9,6 +9,8 @@ export default function SpamDetector() {
   const [result, setResult] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
   const analyzeEmail = async () => {
     if (!email.trim()) return;
 
@@ -24,7 +26,7 @@ export default function SpamDetector() {
         {
           headers: {
             "Content-Type": "application/json",
-            "x-api-key": "MKvy8SAwTMzJvrpmBZGvrh-Bx_bEduX5vV2nI8IGakA",
+            "x-api-key": API_KEY,
           },
         }
       );
