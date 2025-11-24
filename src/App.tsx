@@ -122,7 +122,7 @@ export default function SpamDetector() {
                         className="w-5 h-5 group-hover/btn:animate-pulse"
                         strokeWidth={2.5}
                       />
-                      Classify Message
+                      Check Spam
                     </>
                   )}
                 </div>
