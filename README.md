@@ -1,73 +1,294 @@
-# React + TypeScript + Vite
+# Bruh Spam — README
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Python](https://img.shields.io/badge/Python-3.10-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-API-black.svg)
+![Vercel](https://img.shields.io/badge/Frontend-Vercel-lightgrey.svg)
+![Render](https://img.shields.io/badge/Backend-Render-blue.svg)
 
-Currently, two official plugins are available:
+![bruh logo](logo1.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> **Live**  
+> **Backend (microservice):** https://bruh-spam.onrender.com  
+> **Frontend (web app):** https://bruh-spam.vercel.app/
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## About
 
-## Expanding the ESLint configuration
+Bruh-Spam is an advanced, ML-powered email spam classification system built to be fast, accurate, and developer-friendly.  
+It offers a complete ecosystem including:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔹 A Python/Flask backend microservice for spam prediction
+- 🔹 A clean and intuitive frontend interface for manual testing
+- 🔹 A Gmail Add-on that lets users check any email inside their inbox
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Designed with both users and developers in mind, Bruh-Spam can be used as a website, integrated into applications through its microservice API, or accessed directly from Gmail through the add-on.  
+Whether you're validating suspicious emails or building an email-aware product, Bruh-Spam makes spam detection seamless and accessible.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 1. Product Description
+
+**Bruh Spam** is a lightweight, production-ready spam detection system consisting of:
+
+### ✔️ Backend Microservice
+
+A Flask-based API hosted on Render that exposes a `/predict` endpoint.  
+Send raw email text → get `spam` or `not spam` predictions using a trained ML model.
+
+### ✔️ Gmail Add-on
+
+Integrated directly into Gmail using Google Apps Script.  
+Users can open any email → click **“Check with model”** → get real-time predictions.
+
+### ✔️ Frontend
+
+A simple, clean web interface hosted on Vercel for testing the model manually.
+
+### Use Cases
+
+- Email filtering
+- Automated spam triage
+- Inbox hygiene tools
+- SaaS integrations
+- Browser plugins
+- App-level spam verification
+
+---
+
+## 2. Gmail Add‑on
+
+The Gmail Add‑on appears in your Gmail right sidebar.  
+When a user opens an email, the add-on:
+
+1. Extracts subject + snippet
+2. Sends it to the Bruh Spam microservice
+3. Returns spam analysis immediately
+4. Allows labeling as `Model-Spam` / `Model-Not-Spam`
+
+##### 🔹 Screenshot 1 — Add on message fetching view
+
+![Frontend Screenshot 3](1.jpg)
+
+##### 🔹 Screenshot 1 — Add on result view
+
+![Frontend Screenshot 4](2.jpg)
+
+The add-on is ideal for end-users who want quick, reliable spam checking inside Gmail.
+
+---
+
+## 3. Frontend Website
+
+The live demo (Vercel) showcases the microservice:
+
+👉 **https://bruh-spam.vercel.app/**
+
+Features:
+
+- Minimal UI for manual spam testing
+- Input field for text
+- Instantly displays prediction
+- Great for users who don’t want to use code
+- Useful for debugging & verifying the service
+
+#### 📸 Frontend UI Screenshots
+
+##### 🔹 Screenshot 1 — Not Spam Detection Result
+
+![Frontend Screenshot 1](notspam.jpg)
+
+##### 🔹 Screenshot 2 — Spam Detection Result
+
+![Frontend Screenshot 2](spam.jpg)
+
+---
+
+## 4. Use the Microservice in Your Code
+
+The Bruh Spam microservice is built to be easily used in any environment.
+
+---
+
+# 🔌 API Integration
+
+### Endpoint
+
+```
+POST https://bruh-spam.onrender.com/predict
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Headers
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+Content-Type: application/json
+x-api-key: YOUR_API_KEY
+```
+
+### Body
+
+```json
+{
+  "email_text": "your email text here"
+}
+```
+
+### Response
+
+```json
+{
+  "prediction": "spam"
+}
+```
+
+OR
+
+```json
+{
+  "prediction": "not spam"
+}
+```
+
+---
+
+## 4.1 — Python Example
+
+```python
+import requests
+
+API_URL = "https://bruh-spam.onrender.com/predict"
+API_KEY = "YOUR_KEY"
+
+payload = {"email_text": "Congratulations! You've won a prize!"}
+
+headers = {
+    "x-api-key": API_KEY,
+    "Content-Type": "application/json"
+}
+
+resp = requests.post(API_URL, json=payload, headers=headers)
+print(resp.status_code, resp.json())
+```
+
+---
+
+## 4.2 — JavaScript (Node.js)
+
+```javascript
+const fetch = require("node-fetch");
+
+const API_URL = "https://bruh-spam.onrender.com/predict";
+const API_KEY = "YOUR_KEY";
+
+async function checkSpam(text) {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": API_KEY,
+    },
+    body: JSON.stringify({ email_text: text }),
+  });
+
+  console.log(await res.json());
+}
+
+checkSpam("Get rich quick!");
+```
+
+---
+
+## 4.3 — Browser (CORS enabled)
+
+```javascript
+fetch("https://bruh-spam.onrender.com/predict", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "x-api-key": "YOUR_KEY",
+  },
+  body: JSON.stringify({ email_text: "browser test email" }),
+})
+  .then((res) => res.json())
+  .then(console.log);
+```
+
+---
+
+## 4.4 — Google Apps Script (for Gmail Add-on)
+
+```javascript
+const API_URL = "https://bruh-spam.onrender.com/predict";
+const API_KEY = PropertiesService.getScriptProperties().getProperty("API_KEY");
+
+function callModel(text) {
+  const res = UrlFetchApp.fetch(API_URL, {
+    method: "post",
+    contentType: "application/json",
+    payload: JSON.stringify({ email_text: text }),
+    headers: { "x-api-key": API_KEY },
+    muteHttpExceptions: true,
+  });
+
+  return JSON.parse(res.getContentText());
+}
+```
+
+---
+
+## 5. Troubleshooting
+
+### ❌ 401 Unauthorized
+
+- API key missing or incorrect
+- Make sure header name is exactly `x-api-key`
+
+### ❌ 500 Internal Server Error
+
+- Missing model files (`.pkl`)
+- Wrong python/scikit-learn versions
+
+### ❌ CORS issues
+
+CORS is enabled, but recommended only for development.  
+Use server-to-server requests in production.
+
+---
+
+## 6. Local Development
+
+### Backend
+
+```bash
+cd backend
+docker build -t bruh-backend .
+docker run -p 5000:5000 --env API_KEY=your_key bruh-backend
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## 7. Contributing
+
+Pull Requests are welcome.  
+Please don’t commit private API keys or secrets.
+
+---
+
+## 8. License
+
+MIT License
+
+---
+
+## 9. Contact
+
+Open an issue or reach out to the project owner for API key access or collaboration.
